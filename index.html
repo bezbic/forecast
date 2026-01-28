@@ -51,6 +51,16 @@
         margin-bottom: 16px;
     }
 
+    .countdown {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 28px;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0.4px;
+    }
+
     @media (min-width: 768px) {
         table { font-size: 22px; }
         .header { font-size: 26px; }
@@ -63,6 +73,10 @@
         .header {
             font-size: 19px;
             letter-spacing: 1.5px;
+        }
+        .countdown {
+            bottom: 22px;
+            font-size: 11px;
         }
     
 </style>
@@ -85,6 +99,38 @@
     })(); 
 </script>
 
+<script>
+    (function () {
+        const el = document.getElementById("countdown");
+        if (!el) return;
+
+
+        const target = new Date(2026, 1, 28, 23, 59, 59);
+
+        function tick() {
+            const now = new Date();
+            let diff = Math.floor((target - now) / 1000);
+
+            if (diff <= 0) {
+                el.textContent = "00:00:00";
+                return;
+            }
+
+            const days = Math.floor(diff / 86400);
+            diff %= 86400;
+            const hours = Math.floor(diff / 3600);
+            diff %= 3600;
+            const minutes = Math.floor(diff / 60);
+            const seconds = diff % 60;
+
+            const pad = n => String(n).padStart(2, "0");
+            el.textContent = `${days}d ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    })();
+</script>
 
 <body>
 <div class="wrap">
@@ -156,5 +202,7 @@ style="border-collapse: collapse; font-family: monospace; text-align: center;">
 </table>
 
 </div>
+<div id="countdown" class="countdown"></div>
+    
 </body>
 </html>
