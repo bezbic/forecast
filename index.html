@@ -34,6 +34,25 @@
         letter-spacing: 2px;
         margin-bottom: 16px;
 }
+
+    body {
+        position:relative;
+        overflow: hidden;
+    }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("kitab-signalspectrogram.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        opacity: 0.08;
+        filter: blur(1px);
+        z-index: -1;
+        
 </style>
     
 
